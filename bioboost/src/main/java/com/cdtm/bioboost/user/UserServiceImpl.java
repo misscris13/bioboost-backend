@@ -1,6 +1,8 @@
 package com.cdtm.bioboost.user;
 
+import com.cdtm.bioboost.user.model.User;
 import com.cdtm.bioboost.user.model.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.sound.midi.SysexMessage;
@@ -12,14 +14,15 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private Map<Long, UserDto> users = new HashMap<Long, UserDto>();
+    @Autowired
+    UserRepository userRepository;
 
     /**
      * {@inheritDoc}
      */
-    public List<UserDto> findAll() {
+    public List<User> findAll() {
 
-        return new ArrayList<UserDto>(this.users.values());
+        return (List<User>) this.userRepository.findAll();
     }
 
     /**
@@ -27,26 +30,30 @@ public class UserServiceImpl implements UserService {
      */
     public void save(Long id, UserDto dto) {
 
-        UserDto user;
+        User user;
 
         if (id == null) {
-            user = new UserDto();
-            this.users.put(user.getId(), user);
+            user = new User();
         } else {
-            System.out.println(id);
-            user = this.users.get(id);
+            user = this.userRepository.findById(id).orElse(null);
         }
 
         user.setUser(dto.getUser());
         user.setEmail(dto.getEmail());
         user.setPassword(dto.getPassword());
+
+        this.userRepository.save(user);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    public void delete(Long id) throws Exception {
 
-        this.users.remove(id);
+        if (this.userRepository.findById(id).orElse(null) == null) {
+            throw new Exception("Not exists");
+        }
+
+        this.userRepository.deleteById(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.cdtm.bioboost.user;
 
+import com.cdtm.bioboost.user.model.User;
 import com.cdtm.bioboost.user.model.UserDto;
 
 import java.util.List;
@@ -9,12 +10,12 @@ public interface UserService {
     /**
      * Method that returns all users
      *
-     * @return {@link List} of {@link UserDto}
+     * @return {@link List} of {@link User}
      */
-    List<UserDto> findAll();
+    List<User> findAll();
 
     /**
-     * Method that creates or edits a user
+     * Method that creates or edits a {@link User}
      *
      * @param id    PK of user
      * @param dto   User data
@@ -22,9 +23,9 @@ public interface UserService {
     void save (Long id, UserDto dto);
 
     /**
-     * Method that deletes a user
+     * Method that deletes a {@link User}
      *
      * @param id    PK of user
      */
-    void delete (Long id);
+    void delete (Long id) throws Exception;
 }

@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.cdtm.bioboost.user.model.User;
 import com.cdtm.bioboost.user.model.UserDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    ModelMapper mapper;
+
     /**
      * Method that returns all users
      * Path: /user
@@ -31,12 +37,13 @@ public class UserController {
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<UserDto> findAll() {
 
-        return this.userService.findAll();
+        List<User> users = this.userService.findAll();
+
+        return users.stream().map(e -> mapper.map(e, UserDto.class)).collect(Collectors.toList());
     }
 
     /**
-     * Method that creates or updates a user
-     * Path: /user/id
+     * Method that creates or updates a {@link User}
      *
      * @param id    PK of user
      * @param dto   User data
@@ -49,13 +56,13 @@ public class UserController {
     }
 
     /**
-     * Method that deletes a user
+     * Method that deletes a {@link User}
      *
      * @param id    PK of user
      */
     @Operation(summary = "Delete", description = "Method that deletes a user")
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") Long id) throws Exception {
 
         this.userService.delete(id);
     }
