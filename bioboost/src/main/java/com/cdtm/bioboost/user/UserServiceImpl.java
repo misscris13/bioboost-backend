@@ -5,11 +5,7 @@ import com.cdtm.bioboost.user.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.sound.midi.SysexMessage;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,6 +19,11 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
 
         return (List<User>) this.userRepository.findAll();
+    }
+
+    @Override
+    public User findByEmailAndPassword(String email, String password) {
+        return this.userRepository.findByEmailAndPassword(email, password);
     }
 
     /**

@@ -15,6 +15,13 @@ public interface UserService {
     List<User> findAll();
 
     /**
+     * Method that returns all users
+     *
+     * @return {@link User} of {@link User}
+     */
+    User findByEmailAndPassword(String email, String password);
+
+    /**
      * Method that creates or edits a {@link User}
      *
      * @param id    PK of user
