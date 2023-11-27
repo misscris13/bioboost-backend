@@ -12,8 +12,13 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public List<Product> findTop3(String[] goals) {
+    public Product findById(Long id) {
 
-        return (List<Product>) this.productRepository.findTop3(goals);
+        return this.productRepository.findById(id).orElse(null);
+    }
+
+    public List<Product> findAll() {
+
+        return (List<Product>) this.productRepository.findAll();
     }
 }

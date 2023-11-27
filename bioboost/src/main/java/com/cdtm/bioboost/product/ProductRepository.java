@@ -4,8 +4,9 @@ import com.cdtm.bioboost.product.model.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class ProductRepository extends CrudRepository<Product, Long> {
+import java.util.List;
 
+@Repository
+public interface ProductRepository extends CrudRepository<Product, Long> {
 
 }

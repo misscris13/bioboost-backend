@@ -1,6 +1,8 @@
 package com.cdtm.bioboost.product;
 
 import com.cdtm.bioboost.product.model.ProductDto;
+import com.cdtm.bioboost.productgoal.model.ProductGoalDto;
+import com.cdtm.bioboost.user.model.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
@@ -22,13 +24,10 @@ public class ProductController {
     @Autowired
     ModelMapper mapper;
 
-    /**
-     * Method that returns the top 3 products for the 3 goals
-     */
-    @Operation(summary = "Find top")
-    @RequestMapping(path = "/top3", method = RequestMethod.POST)
-    public List<ProductDto> findTop3(@RequestBody String[] goals) {
+    @Operation(summary = "Find Product")
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public ProductDto findById(@PathVariable("id") Long id) {
 
-        return (this.productService.findTop3(goals)).stream().map(e -> mapper.map(e, ProductDto.class)).collect(Collectors.toList());
+        return mapper.map(this.productService.findById(id), ProductDto.class);
     }
 }

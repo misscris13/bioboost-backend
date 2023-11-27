@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> findTop3(String[] goals);
+    Product findById(Long id);
+
+    List<Product> findAll();
 }
