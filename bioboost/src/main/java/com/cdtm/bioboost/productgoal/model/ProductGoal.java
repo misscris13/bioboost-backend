@@ -13,11 +13,11 @@ public class ProductGoal {
     private ProductGoalId id;
 
     @ManyToOne
-    @JoinColumn(name = "goalId")
+    @JoinColumn(name = "goalID", insertable=false, updatable=false)
     private Goal goal;
 
     @ManyToOne
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "productID", insertable=false, updatable=false)
     private Product product;
 
     @Column(name = "weight", nullable = false)
@@ -45,5 +45,15 @@ public class ProductGoal {
 
     public void setWeight(float weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductGoal{" +
+                "id=" + id +
+                ", goal=" + goal +
+                ", product=" + product +
+                ", weight=" + weight +
+                '}';
     }
 }

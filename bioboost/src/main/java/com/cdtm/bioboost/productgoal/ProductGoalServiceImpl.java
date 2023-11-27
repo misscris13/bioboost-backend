@@ -61,7 +61,7 @@ public class ProductGoalServiceImpl implements ProductGoalService {
             finalTop.add(productService.findById(key));
         });
 
-        top3 = finalTop.subList(0, 2);
+        top3 = finalTop.subList(0, 3);
 
         return top3;
     }

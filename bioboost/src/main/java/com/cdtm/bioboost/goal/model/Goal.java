@@ -40,4 +40,13 @@ public class Goal {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

@@ -8,10 +8,10 @@ import java.io.Serializable;
 @Embeddable
 public class ProductGoalId implements Serializable {
 
-    @Column(name = "goalId")
+    @Column(name = "goalID")
     private Long goalId;
 
-    @Column(name = "productId")
+    @Column(name = "productID")
     private Long productId;
 
     public Long getGoalId() {

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,8 +38,8 @@ public class ProductGoalController {
      */
     @Operation(summary = "Find top")
     @RequestMapping(path = "/top3", method = RequestMethod.POST)
-    public List<ProductGoalDto> findTop3(@RequestBody List<String> goals) {
+    public List<ProductDto> findTop3(@RequestBody String[] goals) {
 
-        return (this.productGoalService.findTop3(goals)).stream().map(e -> mapper.map(e, ProductGoalDto.class)).collect(Collectors.toList());
+        return (this.productGoalService.findTop3(Arrays.asList(goals))).stream().map(e -> mapper.map(e, ProductDto.class)).collect(Collectors.toList());
     }
 }
